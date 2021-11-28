@@ -7,6 +7,9 @@ const quotes = [
     'Do you know what you just said?',
 ];
 
+/**
+ * This will send to the channel a random quote from the list above.
+ */
 const quote = {
     name: 'quote',
     conditions: [hasPrefix(), isCommand('quote')],
