@@ -27,11 +27,12 @@ const greaterThanEqualTo = (expectedAmount, actualAmount) => greaterThan(expecte
 const lessThan = (expectedAmount, actualAmount) => expectedAmount < actualAmount;
 const lessThanEqualTo = (expectedAmount, actualAmount) => lessThan(expectedAmount, actualAmount) || equalTo(expectedAmount, actualAmount);
 
-const hasArgs = (argCount = 1, {
+const hasArgs = ({
+    argCount = 1,
     includeCommand = false,
     throwOnError = true,
     onError,
-    comparitor = equalTo,
+    comparitor = greaterThan,
 } = {}) => message => {
     const args = message.content.trim().split(/ +/);
     if (!includeCommand) {

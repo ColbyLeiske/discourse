@@ -9,7 +9,7 @@ const { getArgs } = require('../../src/preRunHooks');
  */
 const echo = {
     name: 'echo',
-    conditions: [hasPrefix(), isCommand('echo'), hasArgs(1)],
+    conditions: [hasPrefix(), isCommand('echo'), hasArgs()],
     preRunHooks: [getArgs()],
     onRun: (msg, { args }) => msg.channel.send(...args),
 };
