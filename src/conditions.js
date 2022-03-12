@@ -1,33 +1,31 @@
-const ReplyableError = require('./replyableerror');
-const { getPrefix } = require('./prefix');
+import ReplyableError from './replyableerror';
+import { getPrefix } from './prefix';
 
 /**
  * These are all closures to allow a command to configure the condition. For consistency in the API even conditions without config are closures.
  */
-const inChannelByID = id => message => message.channel.id === id;
-// const inBCS = () => inChannelByID(process.env.BCS_ID);
-// const inTwitter = () => inChannelByID(process.env.TWITTER_CHANNEL_ID);
+export const inChannelByID = id => message => message.channel.id === id;
 
-const inVC = () => message => message.member.voice.channel;
+export const inVC = () => message => message.member.voice.channel;
 
-const hasPrefix = ({ prefix = getPrefix() } = {}) => message => message.content.startsWith(prefix);
+export const hasPrefix = ({ prefix = getPrefix() } = {}) => message => message.content.startsWith(prefix);
 
-const isCommand = (expectedCommand, { prefix = getPrefix() } = {}) => (message => {
+export const isCommand = (expectedCommand, { prefix = getPrefix() } = {}) => (message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift();
     return command === expectedCommand;
 });
 
-const contains = (needle = '') => message => message.content.includes(needle);
+export const contains = (needle = '') => message => message.content.includes(needle);
 
 // feels wrong, lets try to clean this up another day
-const equalTo = (expectedAmount, actualAmount) => expectedAmount === actualAmount;
-const greaterThan = (expectedAmount, actualAmount) => expectedAmount > actualAmount;
-const greaterThanEqualTo = (expectedAmount, actualAmount) => greaterThan(expectedAmount, actualAmount) || equalTo(expectedAmount, actualAmount);
-const lessThan = (expectedAmount, actualAmount) => expectedAmount < actualAmount;
-const lessThanEqualTo = (expectedAmount, actualAmount) => lessThan(expectedAmount, actualAmount) || equalTo(expectedAmount, actualAmount);
+export const equalTo = (expectedAmount, actualAmount) => expectedAmount === actualAmount;
+export const greaterThan = (expectedAmount, actualAmount) => expectedAmount > actualAmount;
+export const greaterThanEqualTo = (expectedAmount, actualAmount) => greaterThan(expectedAmount, actualAmount) || equalTo(expectedAmount, actualAmount);
+export const lessThan = (expectedAmount, actualAmount) => expectedAmount < actualAmount;
+export const lessThanEqualTo = (expectedAmount, actualAmount) => lessThan(expectedAmount, actualAmount) || equalTo(expectedAmount, actualAmount);
 
-const hasArgs = ({
+export const hasArgs = ({
     argCount = 1,
     includeCommand = false,
     throwOnError = true,
@@ -49,22 +47,4 @@ const hasArgs = ({
         throw new ReplyableError(`You are missing arguments! Found ${args.length} and was expecting ${argCount}`)
     }
     return hasCorrectArgs;
-}
-
-module.exports = {
-    // inBCS,
-    // inTwitter,
-    inChannelByID,
-    inVC,
-    hasPrefix,
-    contains,
-    isCommand,
-    hasArgs,
-
-    // hasArgs comparitors
-    equalTo,
-    greaterThan,
-    greaterThanEqualTo,
-    lessThan,
-    lessThanEqualTo,
 }

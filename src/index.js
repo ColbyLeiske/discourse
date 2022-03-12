@@ -1,13 +1,22 @@
-const bot = require('./bot');
-const conditions = require('./conditions');
-const preRunHooks = require('./preRunHooks');
-const prefix = require('./prefix');
-const replyableError = require('./replyableerror');
+import * as prefix from './prefix';
+import * as conditions from './conditions';
+import { getArgs } from './preRunHooks';
+import { createClient } from './bot';
+import { echo } from './commands';
+import replyableError from './replyableerror';
 
-modules.exports = {
-    ...bot,
+export default {
     ...conditions,
-    ...preRunHooks,
     ...prefix,
-    ...replyableError,
+
+    getArgs,
+
+    // debug commands
+    echo,
+
+    //control client
+    createClient,
+
+    //errors
+    replyableError,
 }

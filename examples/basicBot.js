@@ -1,6 +1,11 @@
-const { createClient } = require('../src/bot');
-const echo = require('./commands/echo');
-const quote = require('./commands/quote');
+import { createClient } from 'discourse-unstable/bot';
+import { echo, quote } from './commands';
+import { config } from 'dotenv';
+import path from 'path';
+
+config({
+    path: path.join(__dirname, "./.env")
+});
 
 /**
  * Creating our discord client with configuration. This also returns the discord client from discord.js for use.

@@ -1,0 +1,16 @@
+{
+  "name": "discourse-example",
+  "version": "1.0.0",
+  "description": "Example bot for the discourse framework",
+  "main": "basicBot.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-specifier-resolution=node basicBot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Colby Leiske",
+  "license": "ISC",
+  "dependencies": {
+    "discourse-unstable": "^1.0.2"
+  }
+}

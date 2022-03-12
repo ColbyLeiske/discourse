@@ -1,8 +1,18 @@
 {
-  "name": "discourse",
-  "version": "1.0.0",
+  "name": "discourse-unstable",
+  "version": "1.0.3",
   "description": "Discord bot framework",
-  "main": "./src/bot.js",
+  "main": "./src/index.js",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js",
+    "./preRunHooks": "./src/preRunHooks.js",
+    "./commands": "./src/commands.js",
+    "./prefix": "./prefix.js",
+    "./errors": "./replyableerror.js",
+    "./conditions": "./src/conditions.js",
+    "./bot": "./src/bot.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-example": "node ./examples/basicBot.js"
@@ -10,7 +20,9 @@
   "author": "Colby Leiske",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.5.1",
+    "@discordjs/rest": "^0.2.0-canary.0",
+    "discord-api-types": "^0.26.0",
+    "discord.js": "^12.5.3",
     "dotenv": "^8.2.0"
   }
 }

@@ -1,5 +1,7 @@
-import { hasPrefix, isCommand, hasArgs } from 'discourse-unstable/conditions';
-import { getArgs } from 'discourse-unstable/preRunHooks';
+import { hasPrefix, isCommand, hasArgs } from './conditions';
+import { getArgs } from './preRunHooks';
+
+// This is exposed as a debugging command
 
 /**
  * This command will echo back to the channel the arguments provided

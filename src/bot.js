@@ -1,12 +1,6 @@
-const discord = require('discord.js');
-const dotenv = require('dotenv');
-const path = require('path');
-const ReplyableError = require('./replyableerror');
-const { setPrefix } = require('./prefix');
-
-dotenv.config({
-    path: path.join(__dirname, "../.env")
-});
+import { Client } from 'discord.js';
+import { setPrefix } from './prefix';
+import ReplyableError from './replyableerror';
 
 /**
  * An onMessage handler that runs on given list of commands. While commands can have side effects, the onMessage is generally a pure function otherwise
@@ -36,7 +30,7 @@ const onMessage = commands => async message => {
 
         console.log('about to run transforms');
         const flattenObjects = objs => objs.reduce((prev, curr) => ({ ...prev, ...curr }), {});
-        // pass in flat return values from previous pre-run hooks
+        // pass in flat return values from previous pre-run hooks <---- huh
         const transformResults = preRunHooks.map((t, i, preRunHooks) => {
             // @todo memoize the object flattening. We can reduce allocation
             const flattenedResults = flattenObjects(preRunHooks.slice(0, Math.max(i - 1, 0)));
@@ -58,16 +52,18 @@ const onMessage = commands => async message => {
 
 const defaultOnReady = async () => { console.log("Connected to Discord") };
 
-function createClient({ discordToken, commands = [], prefix = '!', onReady = defaultOnReady, sortCommands = true }) {
+export function createClient({
+    discordToken,
+    commands = [],
+    prefix = '!',
+    sortCommands = true,
+    onReady = defaultOnReady,
+}) {
     setPrefix(prefix);
-    // this is check conditions lists that are more restrictive before checking broader, more lax condition lists. Can be overrided with sortCommands
+    // check conditions that are more restrictive (larger array length) before checking broader, more lax condition lists. Can be overrided with sortCommands
     const processedCommands = sortCommands ? commands.sort((a, b) => a.conditions.length > b.conditions.length) : commands;
-    const client = new discord.Client();
+    const client = new Client();
     client.on('ready', onReady);
     client.on('message', onMessage(processedCommands));
     client.login(discordToken);
-}
-
-module.exports = {
-    createClient,
 }

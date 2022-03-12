@@ -1,2 +1,1 @@
-class ReplyableError extends Error { }
-module.exports = ReplyableError
+export default class ReplyableError extends Error { }

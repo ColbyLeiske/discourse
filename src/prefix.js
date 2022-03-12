@@ -1,10 +1,5 @@
 let prefix = process.env.PREFIX || '!';
 
-const setPrefix = newPrefix => prefix = newPrefix;
+export const setPrefix = newPrefix => prefix = newPrefix;
 
-const getPrefix = () => prefix;
-
-module.exports = {
-    setPrefix,
-    getPrefix,
-};
+export const getPrefix = () => prefix;
