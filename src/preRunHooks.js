@@ -5,6 +5,5 @@ export const getArgs = ({ prefix = getPrefix(), includeCommand = false } = {}) =
     if (!includeCommand) {
         args.shift();
     }
-    console.log('including', {args})
     return { args };
 }

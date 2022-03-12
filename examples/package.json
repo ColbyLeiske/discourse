@@ -13,7 +13,7 @@
   "author": "Colby Leiske",
   "license": "ISC",
   "dependencies": {
-    "discourse-unstable": "^1.0.2"
+    "discourse-unstable": "^1.0.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
