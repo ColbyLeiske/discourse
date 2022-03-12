@@ -36,7 +36,7 @@ const onMessage = commands => async message => {
             const flattenedResults = flattenObjects(preRunHooks.slice(0, Math.max(i - 1, 0)));
             return t(message, flattenedResults);
         });
-        console.log({transformResults});
+
         const flatTransformResults = flattenObjects(transformResults);
 
         await onRun(message, flatTransformResults);

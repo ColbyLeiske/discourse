@@ -20,9 +20,9 @@ export const contains = (needle = '') => message => message.content.includes(nee
 
 // feels wrong, lets try to clean this up another day
 export const equalTo = (expectedAmount, actualAmount) => expectedAmount === actualAmount;
-export const greaterThan = (expectedAmount, actualAmount) => expectedAmount > actualAmount;
+export const greaterThan = (expectedAmount, actualAmount) => actualAmount > expectedAmount;
 export const greaterThanEqualTo = (expectedAmount, actualAmount) => greaterThan(expectedAmount, actualAmount) || equalTo(expectedAmount, actualAmount);
-export const lessThan = (expectedAmount, actualAmount) => expectedAmount < actualAmount;
+export const lessThan = (expectedAmount, actualAmount) => actualAmount < expectedAmount;
 export const lessThanEqualTo = (expectedAmount, actualAmount) => lessThan(expectedAmount, actualAmount) || equalTo(expectedAmount, actualAmount);
 
 export const hasArgs = ({
@@ -43,7 +43,7 @@ export const hasArgs = ({
         if (onError) {
             // onError not guaranteed to throw, return to be safe. 
             onError(message);
-            return;
+            return false;
         }
         throw new ReplyableError(`You are missing arguments! Found ${args.length} and was expecting ${argCount}`)
     }
