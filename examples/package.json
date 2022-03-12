@@ -5,12 +5,17 @@
   "main": "basicBot.js",
   "type": "module",
   "scripts": {
-    "start": "node --experimental-specifier-resolution=node basicBot.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --experimental-specifier-resolution=node basicBot.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "symlink": "unlink ./node_modules/discourse-unstable; rm -rf node_modules/discourse-unstable && ln -s ../../../discourse ./node_modules/discourse-unstable",
+    "install:link": "npm install && npm run symlink"
   },
   "author": "Colby Leiske",
   "license": "ISC",
   "dependencies": {
     "discourse-unstable": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

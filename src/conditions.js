@@ -30,7 +30,7 @@ export const hasArgs = ({
     includeCommand = false,
     throwOnError = true,
     onError,
-    comparitor = greaterThan,
+    comparitor = greaterThanEqualTo,
 } = {}) => message => {
     const args = message.content.trim().split(/ +/);
     if (!includeCommand) {
@@ -38,6 +38,7 @@ export const hasArgs = ({
     }
 
     const hasCorrectArgs = comparitor(argCount, args.length);
+    console.log({hasCorrectArgs})
     if (!hasCorrectArgs && throwOnError) {
         if (onError) {
             // onError not guaranteed to throw, return to be safe. 

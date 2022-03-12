@@ -1,7 +1,7 @@
-import { echo } from "./echo";
-import { quote } from "./quote";
+import { echo } from "./echo.js";
+import { quote } from "./quote.js";
 
-export default {
+export {
     echo,
     quote,
 }

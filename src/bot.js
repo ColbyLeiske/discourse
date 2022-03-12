@@ -13,7 +13,7 @@ const onMessage = commands => async message => {
     try {
         const startTime = Date.now();
 
-        console.log('about to find the command');
+        // console.log('about to find the command');
         const command = commands.find(({ name, conditions }) => conditions.every(condition => {
             // console.log(name, condition(message));
             return condition(message);
@@ -28,7 +28,7 @@ const onMessage = commands => async message => {
             preRunHooks = [],
         } = command;
 
-        console.log('about to run transforms');
+        // console.log('about to run transforms');
         const flattenObjects = objs => objs.reduce((prev, curr) => ({ ...prev, ...curr }), {});
         // pass in flat return values from previous pre-run hooks <---- huh
         const transformResults = preRunHooks.map((t, i, preRunHooks) => {
@@ -36,7 +36,7 @@ const onMessage = commands => async message => {
             const flattenedResults = flattenObjects(preRunHooks.slice(0, Math.max(i - 1, 0)));
             return t(message, flattenedResults);
         });
-        // console.log(transformResults);
+        console.log({transformResults});
         const flatTransformResults = flattenObjects(transformResults);
 
         await onRun(message, flatTransformResults);
