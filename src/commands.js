@@ -9,9 +9,9 @@ import { getArgs } from './preRunHooks';
  *  > !echo can you echo @Colby for me?
  *  > can you echo @Colby for me?
  */
-export const echo = {
+ export const echo = {
     name: 'echo',
     conditions: [hasPrefix(), isCommand('echo'), hasArgs()],
     preRunHooks: [getArgs()],
-    onRun: (msg, { args }) => msg.channel.send(...args),
+    onRun: (msg, { args }) => msg.channel.send(args.join(' ')),
 };
